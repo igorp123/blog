@@ -1,0 +1,10 @@
+<h2>Posts</h2>
+<br/>
+<%@posts_list.each do |row|%>
+	<%=row['post']%>
+	<br/>
+	<%=row['created_date']%>
+	<br/><hr/>
+<%end%>
+
+

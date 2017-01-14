@@ -24,15 +24,13 @@ configure do
 end
 
 get '/' do
-	erb "Hello!"			
+	@posts_list = @db.execute 'select * from Posts order by id desc' 
+	erb :index
+
 end
 
 get '/new' do
 	erb :new
-end
-
-get '/posts' do
-	erb "Posts"
 end
 
 
@@ -47,6 +45,6 @@ post '/new' do
 	
 	@db.execute 'insert into Posts (created_date, post) values(datetime(),?)', [@newpost]
 
-	erb "You wrote: #{@newpost}"
+	redirect '/'
 	
 end

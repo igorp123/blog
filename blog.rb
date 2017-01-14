@@ -5,3 +5,12 @@ require 'sinatra/reloader'
 get '/' do
 	erb "Hello!"			
 end
+
+
+get '/new' do
+	erb :new
+end
+
+get '/posts' do
+	erb "Posts"
+end

@@ -13,6 +13,15 @@ before do
 	init_db
 end
 
+configure do
+	init_db
+	@db.execute 'create table if not exists Posts
+  		(
+  			id integer primary key autoincrement,
+  			created_date date, 
+  			post text
+   		)'
+end
 
 get '/' do
 	erb "Hello!"			
@@ -30,6 +39,9 @@ end
 post '/new' do
 	
 	@newpost=params[:newpost]
+	
+	@db.execute 'insert into Posts (created_date, post) values(?,?)', [datetime(),@newpost]
+
 	erb "You wrote: #{@newpost}"
 	
 end

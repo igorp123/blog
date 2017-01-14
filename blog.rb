@@ -38,9 +38,14 @@ end
 
 post '/new' do
 	
-	@newpost=params[:newpost]
+	@newpost=params[:newpost].strip
+
+	if @newpost.length == 0
+		@error = 'Enter your post please...'
+		return erb :new
+	end
 	
-	@db.execute 'insert into Posts (created_date, post) values(datetime(),?)', [@newpost.strip]
+	@db.execute 'insert into Posts (created_date, post) values(datetime(),?)', [@newpost]
 
 	erb "You wrote: #{@newpost}"
 	

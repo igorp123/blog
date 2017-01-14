@@ -40,7 +40,7 @@ post '/new' do
 	
 	@newpost=params[:newpost]
 	
-	@db.execute 'insert into Posts (created_date, post) values(datetime(),?)', [@newpost]
+	@db.execute 'insert into Posts (created_date, post) values(datetime(),?)', [@newpost.strip]
 
 	erb "You wrote: #{@newpost}"
 	
